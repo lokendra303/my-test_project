@@ -1,120 +1,90 @@
-# My Portfolio
+# A birthday surprise for Arjun
 
-A simple, modern, and responsive portfolio website built with HTML, CSS, and JavaScript. Perfect for showcasing your projects and skills.
+A single-page birthday website. It runs as plain HTML, CSS, and JavaScript. No login, no server, and no database. Anyone with the link can open it.
 
-## Features
+Music starts only after the opening button is pressed, then it loops. A small player in the corner can pause or mute it without restarting the song.
 
-- 🎨 Modern, clean design with gradient backgrounds
-- 📱 Fully responsive (mobile, tablet, desktop)
-- ⚡ Smooth scrolling and animations
-- 🚀 Easy to customize
-- 📦 No dependencies or build tools needed
-- ✨ SEO friendly
+## Add your own photos
 
-## Project Structure
+1. Put image files in `assets/images/`. JPG, PNG, and WEBP all work.
+2. Open `script.js` and add a line inside `CONFIG.gallery.photos`:
 
-```
-Portfolio/
-├── index.html      # Main HTML file
-├── styles.css      # Styling
-├── script.js       # JavaScript interactivity
-└── README.md       # This file
+```js
+{ src: "assets/images/photo11.jpg", caption: "Your caption here." },
 ```
 
-## Customization
+3. Leave `caption` as `""` if you do not want words under that photo.
 
-### Update Your Information
+The hero picture is `CONFIG.heroImage`. Right now that is `assets/images/main.jpg`, made from your `main` photo.
 
-Open `index.html` and update:
+You can list as many photos as you like. The gallery is a masonry layout and opens full screen, with next and previous buttons, arrow keys, and swipe.
 
-1. **Name and Title** - Change "Your Name" and the subtitle in the hero section
-2. **About Section** - Update the about text and skills
-3. **Projects** - Modify project cards with your own projects
-4. **Links** - Update email, GitHub, LinkedIn, and Twitter links in the contact section
-5. **Footer** - Update the copyright year
+These files are already filled in from the photos that were in the project folder:
 
-### Colors
+| Site file | Original file |
+| --- | --- |
+| `assets/images/main.jpg` | `main.jfif` |
+| `assets/images/photo2.jpg` | `shared image (5).jfif` |
+| `assets/images/photo3.jpg` | `shared image (14).jfif` |
+| `assets/images/photo4.jpg` | `shared image (8).jfif` |
+| `assets/images/photo5.jpg` | `shared image (12).jfif` |
+| `assets/images/photo6.jpg` | `shared image (9).jfif` |
+| `assets/images/photo7.jpg` | `shared image (10).jfif` |
+| `assets/images/photo8.jpg` | `shared image (13).jfif` |
+| `assets/images/photo9.jpg` | `shared image (11).jfif` |
+| `assets/images/photo10.jpg` | `shared image (7).jfif` |
 
-To change the color scheme, edit the CSS variables in `styles.css`:
+The captions describe what is visible in each photograph. Change them to whatever you want Arjun to read. They are not a diary of events.
 
-```css
-:root {
-    --primary-color: #667eea;
-    --secondary-color: #764ba2;
-    --accent-color: #f5576c;
-    /* ... other colors ... */
-}
+## Add your music
+
+The player uses `assets/music/birthday-song.mp3`.
+
+To use a different song, either replace that file and keep the same name, or change `CONFIG.music` in `script.js` to your new filename. Keep the file inside `assets/music/`.
+
+If the file is missing, the rest of the site still opens and the player asks you to add the song.
+
+## Edit the words
+
+Everything Arjun reads lives in the `CONFIG` object at the top of `script.js`:
+
+- `welcome` — the first screen and the opening button
+- `celebration` — the birthday heading, message, and wish button
+- `gallery` — heading, intro, photo paths, and captions
+- `timeline.memories` — each memory can have a `date`, `title`, `image`, and `caption`
+- `letter.text` — the birthday letter. Put a blank line between paragraphs.
+- `finale` — the closing message, button, and the small photo collage
+
+Leave a memory `date` as `""` when you do not want a date shown. When you do, write it however you like, for example `"14 March 2025"`.
+
+Colors are the variables at the top of `style.css` if you want to shift the palette.
+
+## Preview on your computer
+
+From this folder:
+
+```powershell
+python -m http.server 5500
 ```
 
-## Deployment to GitHub Pages
+Open `http://localhost:5500`.
 
-### Option 1: Automatic (Recommended)
+Use a local server or GitHub Pages rather than double-clicking `index.html`. Browsers often block music on a `file://` page.
 
-1. Create a new GitHub repository named `yourusername.github.io`
-2. Push this portfolio to that repository
-3. Your site will be live at `https://yourusername.github.io`
+## Put it on GitHub Pages
 
-### Option 2: Deploy from Any Repository
+The site root is this folder. `index.html` has to sit at the root of the repository, with `assets` beside it.
 
-1. Create a new GitHub repository (any name)
-2. Push this portfolio to the repository
-3. Go to repository **Settings** → **Pages**
-4. Under "Source", select `main` branch and `/root` folder
-5. Click "Save"
-6. Your site will be live at `https://yourusername.github.io/repository-name`
+1. Create a new **public** GitHub repository.
+2. Upload the contents of `birthday-surprise` (`index.html`, `style.css`, `script.js`, `README.md`, `.nojekyll`, and the `assets` folder). Do not upload the parent folder that still holds the original `.jfif` files, or the site will not be at the repository root.
+3. In the repository, open **Settings → Pages**.
+4. Under **Build and deployment**, choose **Deploy from a branch**.
+5. Choose branch `main` and folder `/ (root)`, then save.
+6. Wait a minute. The link will look like `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/`.
+7. Open the link, press the surprise button, and confirm the music plays. Then send that link to Arjun.
 
-## How to Use Locally
+Paths such as `assets/images/main.jpg` are relative, so they work on a project site (`username.github.io/repo/`) and on a user site.
 
-1. Clone or download this repository
-2. Open `index.html` in your web browser
-3. That's it! The portfolio works without any build process
+The page includes `noindex` so search engines are asked not to list it. Remove the robots tag in `index.html` if you want it to be searchable.
 
-## Git Commands for Deployment
-
-```bash
-# Initialize git (if not already done)
-git init
-
-# Add all files
-git add .
-
-# Commit changes
-git commit -m "Initial portfolio commit"
-
-# Add remote repository
-git remote add origin https://github.com/yourusername/yourusername.github.io.git
-
-# Push to GitHub
-git branch -M main
-git push -u origin main
-```
-
-## Tips for Better Results
-
-- Add real project images by updating the `project-image` divs
-- Link your projects to actual GitHub repositories
-- Update all social media links
-- Consider adding a custom domain (optional)
-- Test responsiveness on mobile devices before deploying
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers
-
-## License
-
-Feel free to use this portfolio as a template for your own website.
-
-## Need Help?
-
-- Check GitHub Pages documentation: https://pages.github.com/
-- Learn more about HTML/CSS: https://developer.mozilla.org/
-- Customize further with your own CSS and JavaScript
-
----
-
-**Happy coding! 🚀**
+Anyone with the link can open the page. There is no password.
